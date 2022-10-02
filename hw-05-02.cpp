@@ -25,7 +25,7 @@ int main() {
     for (a; a < b; a += d) {
         double s1 = 0;
         double s2 = 0;
-        for (long long int i = 0; i >= 0; i++) {
+        for (long long int i = 1; i >= 0; i++) {
             s1 += (std::pow(a, i)) * (std::sin((M_PI / 4) * i));
             s2 += (std::pow(a, i + 1)) * (std::sin((M_PI / 4) * (i + 1)));
             f = (a * std::sin(M_PI / 4)) / (1 - 2 * a * std::cos(M_PI / 4));
