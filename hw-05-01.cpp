@@ -22,9 +22,8 @@ int main() {
         double s1 = 0;
         double s2 = 0;
         for (long long int i = 0; i >= 0; i++){
-
             s1 += (std::pow(-1, i))*((std::pow(a, 2*i)) / (fac_count(2*i)));
-            s2 += (std::pow(-1, i))*((std::pow(a, 2*(i+1))) / (fac_count(2*(i+1))));
+            s2 += (std::pow(-1, i+1))*((std::pow(a, 2*(i+1))) / (fac_count(2*(i+1))));
             f = std::cos(a);
             if (std::abs(s2-s1) < e){
                 std::cout<<a<<"|"<<s1<<"|"<<f<<std::endl;
