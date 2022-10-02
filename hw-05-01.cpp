@@ -1,13 +1,13 @@
 #include <iostream>
 #include <cmath>
 
-float fac_count(long long int i){
-    if (i ==0){
+float fac_count(long long int i) {
+    if (i == 0) {
         return 1;
     }
     long long int res = 1;
-    for (long long int j = i; j<= i; j++){
-        res *=i;
+    for (long long int j = 1; j <= i; j++) {
+        res *= j;
     }
     return res;
 }
