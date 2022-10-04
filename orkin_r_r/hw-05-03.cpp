@@ -22,16 +22,15 @@ int main() {
     double d = 0.1;
     double e = 0.0001;
     double f = 0;
-    for (a; a < b; a += d) {
-        double s1 = 0;
-        double s2 = 0;
+    for (a; a <= b; a += d) {
+        double s = 0;
+        double x = 0;
         for (long long int i = 0; i >= 0; i++) {
-            std::cout<<std::abs(s2 - s1);
-            s1 += (std::pow(2*a, i)) / (fac_count(i));
-            s2 += (std::pow(2*a, i+1)) / (fac_count(i+1));
-            f = (std::pow(M_E, 2*a));
-            if (std::abs(s2 - s1) < e) {
-                std::cout << a << "|" << s1 << "|" << f << std::endl;
+            x = (std::pow(2 * a, i)) / (fac_count(i));
+            s += x;
+            f = (std::pow(M_E, 2 * a));
+            if (std::abs(x) < e) {
+                std::cout << a << "|" << s << "|" << f << std::endl;
                 break;
             }
         }
