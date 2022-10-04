@@ -1,10 +1,6 @@
 #include <iostream>
 #include <cmath>
 
-#define _USE_MATH_DEFINES
-
-#include <iomanip>
-
 float fac_count(long long int i) {
     if (i == 0) {
         return 1;
