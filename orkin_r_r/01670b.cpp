@@ -41,7 +41,7 @@ int main() {
 
         first_item = str[0];
         count = 0;
-        while ((special_count >= 1) and (arr[int(first_item)] != 1)) {
+        while (((special_count > 1) or (arr[int(first_item)] != 1))) {
             int i = 0;
             int tmp = 0;
             while (i < n) {
@@ -53,7 +53,7 @@ int main() {
                     }
                     str.erase(i, 1);
                     n--;
-                    i -= tmp;
+                    i --;
                     tmp = 0;
                 } else {
                     tmp += 1;
