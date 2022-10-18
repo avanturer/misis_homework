@@ -1,69 +1,34 @@
 #include <iostream>
 #include <string>
-#include <array>
-
-int main() {
+int main()
+{
     int t = 0;
-    int n = 0;
-    int k = 0;
-    int special_count = 0;
-    char c = 0;
-    int count = 0;
-    unsigned char c1 = 0;
-    unsigned char first_item = 0;
-
-
-    std::cin >> t;
-
-    for (int j = 0; j < t; j++) {
-
-        std::string str;
-        std::cin >> n;
-        for (int i = 0; i < n; i++) {
-            std::cin >> c;
-            str.push_back(c);
+    char a = '0';
+    std::cin>>t;
+    for(int j = 0; j < t; j++){
+        std::string arr;
+        
+        int count = 0;
+        int left = 0;
+        int right = 0;
+        
+        std::cin>>arr;
+        
+        right = arr.size()-1;
+        for(int i = arr.size()-1; i>=0; i--){
+            if (arr[i] == '1'){
+                left = i;
+                break;
+            } 
         }
-
-        std::array<int, 257> arr{0};
-        std::cin >> k;
-        for (int i = 0; i < k; i++) {
-            std::cin >> c1;
-            arr[int(c1)] = 1;
+        for(int i = 0; i < arr.size(); i++){
+            if (arr[i] == '0'){
+                right = i;
+                break;
+            } 
         }
-
-        special_count = 0;
-        for (int i = 0; i < n; i++) {
-            c1 = str[i];
-            if (arr[int(c1)] == 1) {
-                special_count += 1;
-            }
-        }
-
-        first_item = str[0];
-        count = 0;
-        while (((special_count > 1) or (arr[int(first_item)] != 1))) {
-            int i = 0;
-            int tmp = 0;
-            while (i < n) {
-                c1 = str[i + 1];
-                if (arr[int(c1)] == 1) {
-                    c1 = str[i];
-                    if (arr[int(c1)] == 1) {
-                        special_count -= 1;
-                    }
-                    str.erase(i, 1);
-                    n--;
-                    i --;
-                    tmp = 0;
-                } else {
-                    tmp += 1;
-                }
-                i++;
-            }
-            count += 1;
-            first_item = str[0];
-        }
-        std::cout << count << std::endl;
+        std::cout<<right-left+1<<std::endl;
     }
+
     return 0;
 }
