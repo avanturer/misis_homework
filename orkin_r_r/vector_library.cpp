@@ -12,35 +12,25 @@ struct Rpol2D{
     double phi = 0.0;
 };
 
-double Plus(double x1, double y1, double x2, double y2){
-    double summX = 0;
-    double summY = 0;
+Rdec2D operator+(const Rdec2D& a, const Rdec2D& b){
+    Rdec2D result;
     
-    summX = x1 + x2;
-    summY = y1 + y2;
+    result.x = a.x + b.x;
+    result.y = a.y + b.y;
     
-    return summX, summY;
+    return result;
 };
 
-double Minus(double x1, double y1, double x2, double y2){
-    double subtractX = 0;
-    double subtractY = 0;
+Rdec2D operator-(const Rdec2D& a, const Rdec2D& b){
+    Rdec2D result;
     
-    subtractX = x1 - x2;
-    subtractY = y1 - y2;
+    result.x = a.x - b.x;
+    result.y = a.y - b.y;
     
-    return subtractX, subtractY;
+    return result;
 };
 
-double Scalar(double x1, double y1, double x2, double y2){
-    double multipliX = 0;
-    double multipliY = 0;
-    
-    multipliX = x1 * x2;
-    multipliY = y1 * y2;
-    
-    return multipliX, multipliY;
-};
+
 
 double PolToDec(double z, double phi){
     double x = 0;
@@ -64,12 +54,7 @@ double DecToPol(double x, double y){
 
 int main()
 {
-    
-    const double x1 = 5.0;
-    const double y1 = 4.0;
-    const duuble z1 = 10;
-    const duuble phi1 = 3;
-    
+
     Rdec2D dec;
     Rpol2D pol;
     
