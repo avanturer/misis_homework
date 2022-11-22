@@ -134,6 +134,30 @@ Rpol2D operator*(double a, const Rpol2D &b) {
     return result;
 }
 
+Rdec2D operator*(const Rdec2D &b, double a) {
+    Rdec2D result;
+
+    result.x = a * b.x;
+    result.y = a * b.y;
+
+    return result;
+}
+
+Rpol2D operator*(const Rpol2D &b, double a) {
+    Rpol2D result;
+    Rdec2D dec1;
+    Rdec2D dec2;
+
+    dec1 = ToDec(b);
+
+    dec2.x = a * dec1.x;
+    dec2.y = a * dec1.y;
+
+    result = ToPol(dec2);
+
+    return result;
+}
+
 Rdec2D operator/(const Rdec2D &a, double b) {
     Rdec2D result;
 
@@ -270,10 +294,5 @@ bool operator!=(const Rdec2D &a, const Rpol2D &b) {
 };
 
 int main() {
-
-    Rdec2D dec;
-    Rpol2D pol;
-
-    std::cout << 0;
     return 0;
 }
