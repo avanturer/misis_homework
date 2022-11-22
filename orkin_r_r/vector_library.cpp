@@ -1,6 +1,6 @@
 #include <iostream>
 #include <cmath>
-#include <std::vector>
+#include <vector>
 
 struct Rdec2D{
     double x = 0.0;
