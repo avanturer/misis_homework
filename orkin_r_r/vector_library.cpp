@@ -193,14 +193,6 @@ double Norm(const Rdec2D &a) {
     return result;
 }
 
-double Norm(const Rpol2D &a) {
-    double result = 0;
-
-    result = std::sqrt(std::pow(a.z, 2) * 2);
-
-    return result;
-}
-
 bool operator==(const Rdec2D &a, const Rdec2D &b) {
     bool result = false;
 
