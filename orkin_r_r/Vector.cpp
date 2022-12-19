@@ -292,7 +292,3 @@ bool operator!=(const Rdec2D &a, const Rpol2D &b) {
 
     return result;
 };
-
-int main() {
-    return 0;
-}
