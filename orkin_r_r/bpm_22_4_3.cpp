@@ -16,40 +16,36 @@ int main() {
 
     if (word1[size1 - 1] != word2[size2 - 1]) {
         std::cout << size1 + size2;
-    }
-    else if (size1 == size2) {
+    } else if (size1 == size2) {
         int count = 0;
         for (int i = size1 - 1; i >= 0; i--) {
             if (word1[i] == word2[i]) {
                 count += 2;
-            }
-            else {
+            } else {
                 std::cout << size1 + size2 - count;
                 break;
             }
         }
-    }
-    else if(size1 != size2){
+    } else if (size1 != size2) {
         int count = 0;
-        if (size1 > size2){
-            word1.erase(word1.begin(), word1.begin()+ abs(size1-size2));
+        if (size1 > size2) {
+            word1.erase(word1.begin(), word1.begin() + abs(size1 - size2));
+        } else {
+            word2.erase(word1.begin(), word1.begin() + abs(size1 - size2));
         }
-
-        else{
-            word2.erase(word1.begin(), word1.begin()+ abs(size1-size2));
-        }
-        count += abs(size1-size2);
-        for (int i = std::min(size1, size2)-1; i >= 0; i--) {
-            std::cin>>i;
+        count += abs(size1 - size2);
+        int new_size1 = word1.size();
+        int new_size2 = word2.size();
+        int count2 = 0;
+        for (int i = std::min(size1, size2) - 1; i >= 0; i--) {
             if (word1[i] == word2[i]) {
-                count += 2;
+                count2 += 2;
+            } else {
+                std::cout << new_size1 + new_size2 - count2 + count;
+                return 0;
             }
-            else {
-                std::cout << size1 + size2 - count;
-                break;
-            }
-            std::cout<<count;
         }
+        std::cout << count;
     }
 
 
