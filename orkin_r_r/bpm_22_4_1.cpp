@@ -24,7 +24,7 @@ int main() {
         double s = 0;
         double x = 0;
         for (long long int i = 0; i >= 0; i++) {
-            x = (std::pow(x, 2 * i)) / (fac_count(2 * i));
+            x = (std::pow(a, 2 * i)) / (fac_count(2 * i));
             s += x;
             if (std::abs(x) < e) {
                 std::cout << "x: " << a << " " << "E: " << s << std::endl;
