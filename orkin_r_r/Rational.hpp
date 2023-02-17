@@ -37,7 +37,7 @@ public:
 
     std::istream &readFrom(std::istream &istrm);
 
-    std::ostream &writeTo(std::ostream &ostrm);
+    std::ostream &writeTo(std::ostream &ostrm) const;
 
     ~Rational();
 
@@ -52,7 +52,7 @@ private:
     static const char separator{'/'};
 };
 
-inline std::ostream &operator<<(std::ostream &ostrm, Rational &a) {
+inline std::ostream &operator<<(std::ostream &ostrm, const Rational &a) {
     return a.writeTo(ostrm);
 }
 
@@ -71,7 +71,9 @@ Rational operator/(const Rational &a, const Rational &b);
 
 int main() {
     Rational a;
-    std::cin >> a;
+    Rational b;
+    std::cin >> a >> b;
+    std::cout << (a + b);
 }
 
 Rational::Rational() = default;
@@ -284,8 +286,7 @@ Rational operator/(const Rational &a, const Rational &b) {
     return res;
 }
 
-std::ostream &Rational::writeTo(std::ostream &ostrm) {
-    redaction();
+std::ostream &Rational::writeTo(std::ostream &ostrm) const {
     ostrm << num_ << separator << denum_ << std::endl;
     return ostrm;
 }
