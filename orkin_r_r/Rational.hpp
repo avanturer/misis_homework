@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <stdexcept>
 
 class Rational {
 public:
@@ -19,9 +19,9 @@ public:
 
     Rational &operator/=(const Rational &a);
 
-    Rational &operator++();
+    Rational &operator++(int);
 
-    Rational &operator--();
+    Rational &operator--(int);
 
     bool operator==(const Rational &a) const;
 
@@ -70,7 +70,8 @@ Rational operator/(const Rational &a, const Rational &b);
 
 
 int main() {
-    
+    Rational a;
+    std::cin >> a;
 }
 
 Rational::Rational() = default;
@@ -81,16 +82,16 @@ Rational::Rational(int32_t num, int32_t denum) {
     if (check_input(num, denum)) {
         num_ = num;
         denum_ = denum;
+        redaction();
     }
-    redaction();
 }
 
 bool Rational::check_input(int32_t num = 0, int32_t denum = -1) {
     if (denum == 0 or denum < 0) {
-        std::cout << "bad input";
-        return false;
+        throw std::invalid_argument("bad input");
+    } else {
+        return true;
     }
-    return true;
 }
 
 Rational &Rational::redaction() {
@@ -118,9 +119,9 @@ Rational &Rational::operator=(const Rational &tmp) = default;
 
 Rational &Rational::operator+=(const Rational &a) {
     if (denum_ != a.denum_) {
-        denum_ *= a.denum_;
         num_ *= a.denum_;
         num_ += a.num_ * denum_;
+        denum_ *= a.denum_;
     } else {
         num_ += a.num_;
     }
@@ -130,9 +131,9 @@ Rational &Rational::operator+=(const Rational &a) {
 
 Rational &Rational::operator-=(const Rational &a) {
     if (denum_ != a.denum_) {
-        denum_ *= a.denum_;
         num_ *= a.denum_;
         num_ -= a.num_ * denum_;
+        denum_ *= a.denum_;
     } else {
         num_ -= a.num_;
     }
@@ -152,8 +153,7 @@ Rational &Rational::operator/=(const Rational &a) {
         num_ *= -a.denum_;
         denum_ *= -a.num_;
     } else if (a.num_ == 0) {
-        std::cout << "error";
-        exit(0);
+        throw std::invalid_argument("division by zero");
     } else {
         num_ *= a.denum_;
         denum_ *= a.num_;
@@ -163,13 +163,13 @@ Rational &Rational::operator/=(const Rational &a) {
     return *this;
 }
 
-Rational &Rational::operator++() {
+Rational &Rational::operator++(int) {
     num_ += denum_;
     redaction();
     return *this;
 }
 
-Rational &Rational::operator--() {
+Rational &Rational::operator--(int) {
     num_ -= denum_;
     redaction();
     return *this;
@@ -286,17 +286,17 @@ Rational operator/(const Rational &a, const Rational &b) {
 
 std::ostream &Rational::writeTo(std::ostream &ostrm) {
     redaction();
-    ostrm << num_ << separator << denum_;
+    ostrm << num_ << separator << denum_ << std::endl;
     return ostrm;
 }
 
 std::istream &Rational::readFrom(std::istream &istrm) {
     int32_t num(0);
     char comma(0);
-    int32_t denum(1);
+    int32_t denum(0);
     istrm >> num >> comma >> denum;
     if (istrm.good()) {
-        if ((Rational::separator == comma)) {
+        if ((Rational::separator == comma) and check_input(num, denum)) {
             num_ = num;
             denum_ = denum;
         } else {
@@ -308,4 +308,3 @@ std::istream &Rational::readFrom(std::istream &istrm) {
 }
 
 Rational::~Rational() = default;
-
