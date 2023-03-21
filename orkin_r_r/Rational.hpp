@@ -9,6 +9,8 @@ public:
 
     Rational(int32_t num, int32_t denum);
 
+    Rational(int32_t num);
+
     Rational &operator=(const Rational &);
 
     Rational &operator+=(const Rational &a);
@@ -41,7 +43,7 @@ public:
 
     ~Rational();
 
-    static bool check_input(int32_t num, int32_t denum);
+    static bool check_input(int32_t denum);
 
     Rational &redaction();
 
@@ -70,10 +72,10 @@ Rational operator/(const Rational &a, const Rational &b);
 
 
 int main() {
-    Rational a;
-    Rational b;
+    Rational a, b;
     std::cin >> a >> b;
-    std::cout << (a + b);
+
+    std::cout << a << " " << b;
 }
 
 Rational::Rational() = default;
@@ -81,15 +83,15 @@ Rational::Rational() = default;
 Rational::Rational(const Rational &) = default;
 
 Rational::Rational(int32_t num, int32_t denum) {
-    if (check_input(num, denum)) {
+    if (check_input(denum)) {
         num_ = num;
         denum_ = denum;
         redaction();
     }
 }
 
-bool Rational::check_input(int32_t num = 0, int32_t denum = -1) {
-    if (denum == 0 or denum < 0) {
+bool Rational::check_input(int32_t denum) {
+    if (denum <= 0) {
         throw std::invalid_argument("bad input");
     } else {
         return true;
@@ -293,11 +295,16 @@ std::ostream &Rational::writeTo(std::ostream &ostrm) const {
 
 std::istream &Rational::readFrom(std::istream &istrm) {
     int32_t num(0);
-    char comma(0);
-    int32_t denum(0);
+    char comma('/');
+    int32_t denum(1);
     istrm >> num >> comma >> denum;
     if (istrm.good()) {
-        if ((Rational::separator == comma) and check_input(num, denum)) {
+        if (istrm.peek() != ' ') {
+            while (istrm.peek() != '\n') {
+                istrm.get();
+            }
+        }
+        if ((Rational::separator == comma) and denum >= 0) {
             num_ = num;
             denum_ = denum;
         } else {
@@ -306,6 +313,10 @@ std::istream &Rational::readFrom(std::istream &istrm) {
     }
     return istrm;
 
+}
+
+Rational::Rational(int32_t num) {
+    num_ = num;
 }
 
 Rational::~Rational() = default;
